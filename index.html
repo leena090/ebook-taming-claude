@@ -378,7 +378,9 @@
           </div>
           <pre><code><span class="code-comment"># 이 파일은 여러분이 클로드에게 말할 때마다 자동으로 실행됩니다</span>
 
-<span class="code-comment"># "팀"이라는 단어가 포함되어 있으면 경고를 띄움</span>
+<span class="code-comment"># $PROMPT = 여러분이 입력한 말</span>
+<span class="code-comment"># grep = 특정 단어가 있는지 찾는 명령어</span>
+<span class="code-comment"># "팀", "team", "에이전트" 중 하나라도 있으면 → 경고!</span>
 if echo "$PROMPT" | grep -qi "팀\|team\|에이전트"; then
   echo "⚠️ [경고] 팀 작업이 필요한 것 같습니다!"
   echo "→ 반드시 팀을 먼저 만드세요. 혼자 하면 안 됩니다."
@@ -403,13 +405,13 @@ fi</code></pre>
         <h2 class="chapter-title">훅은 이렇게 동작합니다</h2>
 
         <div class="pipeline-flow">
-          <div class="pipeline-step">내가 말함</div>
+          <div class="pipeline-step">Prompt<br>내가 말함</div>
           <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">훅이 검사</div>
+          <div class="pipeline-step">Hook<br>훅이 검사</div>
           <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">경고 띄움</div>
+          <div class="pipeline-step">Inject<br>경고 주입</div>
           <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">AI가 실행</div>
+          <div class="pipeline-step">Execute<br>AI가 실행</div>
         </div>
 
         <div class="body-text">
@@ -513,20 +515,20 @@ fi</code></pre>
 
           <div class="code-block">
             <div class="code-header">
-              <span class="code-label">스킬 파일 머리글 예시</span>
+              <span class="code-label">스킬 파일의 frontmatter(머리글 설정) 예시</span>
             </div>
-            <pre><code><span class="code-comment">---</span>
-<span class="code-comment"># 이 스킬에서 사용 가능한 도구 목록</span>
+            <pre><code><span class="code-comment">--- ← frontmatter 시작 표시</span>
+<span class="code-comment"># allowed-tools: 이 스킬에서 사용 가능한 도구 목록</span>
 allowed-tools:
   - Read    <span class="code-comment"># 파일 읽기만 허용</span>
   - Write   <span class="code-comment"># 파일 쓰기만 허용</span>
   - Bash    <span class="code-comment"># 명령어 실행만 허용</span>
-version: 2.1  <span class="code-comment"># 버전 번호</span>
-<span class="code-comment">---</span></code></pre>
+version: 2.1  <span class="code-comment"># version: 이 스킬의 버전 번호</span>
+<span class="code-comment">--- ← frontmatter 끝 표시</span></code></pre>
           </div>
 
-          <h3>버전 관리 — "언제 바꿨는지 기록"</h3>
-          <p>스킬을 수정할 때마다 버전 번호를 올려둡니다. 나중에 문제가 생기면 "아, 버전 2.0 때 바꾼 게 원인이구나" 하고 <span class="marker-green">이전으로 돌아갈 수 있습니다</span><span class="annotation-star"></span>.</p>
+          <h3>version(버전 번호) — "언제 바꿨는지 기록"</h3>
+          <p>스킬을 수정할 때마다 <code>version</code> 번호를 올려둡니다. 나중에 문제가 생기면 "아, 버전 2.0 때 바꾼 게 원인이구나" 하고 <span class="marker-green">이전으로 돌아갈 수 있습니다</span><span class="annotation-star"></span>.</p>
         </div>
 
         <div class="page-footer">
@@ -545,11 +547,11 @@ version: 2.1  <span class="code-comment"># 버전 번호</span>
         </div>
 
         <div class="pipeline-flow">
-          <div class="pipeline-step">메모리</div>
+          <div class="pipeline-step">Memory<br>메모리</div>
           <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">훅</div>
+          <div class="pipeline-step">Hook<br>훅</div>
           <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">스킬</div>
+          <div class="pipeline-step">Skill<br>스킬</div>
         </div>
 
         <div class="command-table">
@@ -563,9 +565,9 @@ version: 2.1  <span class="code-comment"># 버전 번호</span>
               </tr>
             </thead>
             <tbody>
-              <tr><td>메모리</td><td>기억 저장</td><td>모니터에 포스트잇 붙이기</td><td>약 60%</td></tr>
-              <tr><td>훅</td><td>자동 감시</td><td>현관문 자동 알림 장치</td><td>약 70%</td></tr>
-              <tr><td>스킬 2.0</td><td>업무 지침</td><td>신입 직원용 업무 매뉴얼</td><td>약 85%</td></tr>
+              <tr><td>Memory (메모리)<br><code>MEMORY.md</code></td><td>기억 저장</td><td>모니터에 포스트잇 붙이기</td><td>약 60%</td></tr>
+              <tr><td>Hook (훅)<br><code>settings.json</code></td><td>자동 감시</td><td>현관문 자동 알림 장치</td><td>약 70%</td></tr>
+              <tr><td>Skill 2.0 (스킬)<br><code>.claude/skills/</code></td><td>업무 지침</td><td>신입 직원용 업무 매뉴얼</td><td>약 85%</td></tr>
               <tr><td>3개 합치기</td><td>완전 제어</td><td>포스트잇 + 알림 + 매뉴얼</td><td>약 95%</td></tr>
             </tbody>
           </table>
@@ -598,21 +600,21 @@ version: 2.1  <span class="code-comment"># 버전 번호</span>
           <div class="step-box">
             <div class="step-number">1</div>
             <div class="step-content">
-              <p><strong>메모리 파일에 규칙 하나 적어보기</strong> — MEMORY.md를 열고, AI에게 꼭 지켜줬으면 하는 규칙을 하나만 적어보세요. 예를 들어 "한국어로만 대답해"처럼요.</p>
+              <p><strong>메모리 파일에 규칙 하나 적어보기</strong> — <code>MEMORY.md</code>(메모리 파일)를 열고, AI에게 꼭 지켜줬으면 하는 규칙을 하나만 적어보세요. 예를 들어 "한국어로만 대답해"처럼요.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">2</div>
             <div class="step-content">
-              <p><strong>훅 하나 설정해보기</strong> — settings.json에 간단한 훅을 하나 등록해보세요. 특정 단어가 나올 때 경고가 뜨는지 확인하는 것만으로도 큰 진전입니다.</p>
+              <p><strong>Hook(훅) 하나 설정해보기</strong> — <code>settings.json</code>(설정 파일)에 간단한 훅을 하나 등록해보세요. 특정 단어가 나올 때 경고가 뜨는지 확인하는 것만으로도 큰 진전입니다.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">3</div>
             <div class="step-content">
-              <p><strong>스킬 파일 하나 만들어보기</strong> — <code>.claude/skills/</code> 폴더에 스킬 파일을 하나 만들어보세요. 처음엔 간단한 것부터 시작하면 됩니다.</p>
+              <p><strong>Skill(스킬) 파일 하나 만들어보기</strong> — <code>.claude/skills/</code> 폴더(스킬 저장소)에 스킬 파일을 하나 만들어보세요. 처음엔 간단한 것부터 시작하면 됩니다.</p>
             </div>
           </div>
 
