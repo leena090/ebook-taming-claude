@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>클로드 코드 길들이기 — 메모리, 훅, 스킬로 AI를 제어하는 법</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/ebook.css">
+</head>
+<body>
+  <!-- 진행률 바 -->
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- 컨트롤 바 -->
+  <div class="controls-bar">
+    <button class="control-btn" id="tocToggle">☰ 목차</button>
+    <span class="page-indicator" id="pageIndicator">1 / 14</span>
+    <div class="controls-right">
+      <button class="control-btn" id="fontDecrease">A-</button>
+      <button class="control-btn" id="fontIncrease">A+</button>
+      <button class="control-btn" id="themeToggle">🌙</button>
+    </div>
+  </div>
+
+  <!-- 목차 사이드바 -->
+  <div class="toc-sidebar" id="tocSidebar">
+    <div class="toc-header">
+      <h2>목차</h2>
+      <button class="toc-close" id="tocClose">&times;</button>
+    </div>
+    <ul class="toc-list">
+      <li><a href="#" class="toc-link" data-page="0">표지</a></li>
+      <li><a href="#" class="toc-link" data-page="1">이 책의 구성</a></li>
+      <li><a href="#" class="toc-link" data-page="2">Ch.1 문제 발생</a></li>
+      <li><a href="#" class="toc-link" data-page="3">Ch.1 왜 이런 일이?</a></li>
+      <li><a href="#" class="toc-link" data-page="4">Ch.2 메모리란?</a></li>
+      <li><a href="#" class="toc-link" data-page="5">Ch.2 메모리의 한계</a></li>
+      <li><a href="#" class="toc-link" data-page="6">Ch.3 훅이란?</a></li>
+      <li><a href="#" class="toc-link" data-page="7">Ch.3 훅 vs 다른 방법</a></li>
+      <li><a href="#" class="toc-link" data-page="8">Ch.4 훅 실전 설정</a></li>
+      <li><a href="#" class="toc-link" data-page="9">Ch.4 훅 작동 원리</a></li>
+      <li><a href="#" class="toc-link" data-page="10">Ch.5 스킬 2.0</a></li>
+      <li><a href="#" class="toc-link" data-page="11">Ch.6 스킬 안전장치</a></li>
+      <li><a href="#" class="toc-link" data-page="12">총정리</a></li>
+      <li><a href="#" class="toc-link" data-page="13">다음 단계</a></li>
+    </ul>
+  </div>
+  <div class="toc-overlay" id="tocOverlay"></div>
+
+  <!-- 책 컨테이너 -->
+  <div class="book-container">
+
+    <!-- ========== 슬라이드 1: 표지 ========== -->
+    <div class="page page-cover active">
+      <div class="cover-content">
+        <div class="cover-subtitle-top">노모어매뉴얼 실전 가이드</div>
+        <div class="cover-decoration">
+          <span class="cover-line"></span>
+          <span class="cover-diamond">◆</span>
+          <span class="cover-line"></span>
+        </div>
+        <h1 class="cover-title">클로드 코드<span class="cover-title-accent">길들이기</span></h1>
+        <p class="cover-description">메모리, 훅, 스킬로 AI를 제어하는 법</p>
+        <div class="cover-img-wrapper">
+          <img src="assets/images/cover-illustration.png" class="cover-image" alt="표지 일러스트">
+        </div>
+        <div class="cover-author">노모어매뉴얼</div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 2: 이 책의 구성 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-header">
+          <h2 class="chapter-title">이 책의 구성</h2>
+          <div class="chapter-divider"><span class="divider-ornament">◆ ◆ ◆</span></div>
+        </div>
+
+        <ul class="toc-main-list">
+          <li class="toc-item">
+            <a href="#" class="toc-page-link" data-page="2">
+              <span class="toc-chapter-num">01</span>
+              <span class="toc-chapter-info">
+                <span class="toc-chapter-title">Phase 1: 문제 발생</span>
+                <span class="toc-chapter-desc">AI가 규칙을 무시하는 이유 (Ch.1)</span>
+              </span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">3</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#" class="toc-page-link" data-page="4">
+              <span class="toc-chapter-num">02</span>
+              <span class="toc-chapter-info">
+                <span class="toc-chapter-title">Phase 2: 메모리</span>
+                <span class="toc-chapter-desc">피드백을 저장하는 첫 번째 무기 (Ch.2)</span>
+              </span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">5</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#" class="toc-page-link" data-page="6">
+              <span class="toc-chapter-num">03</span>
+              <span class="toc-chapter-info">
+                <span class="toc-chapter-title">Phase 3: 훅</span>
+                <span class="toc-chapter-desc">강제 실행하는 두 번째 무기 (Ch.3~4)</span>
+              </span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">7</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#" class="toc-page-link" data-page="10">
+              <span class="toc-chapter-num">04</span>
+              <span class="toc-chapter-info">
+                <span class="toc-chapter-title">Phase 4: 스킬 2.0</span>
+                <span class="toc-chapter-desc">체계적 관리의 세 번째 무기 (Ch.5~6)</span>
+              </span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">11</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 3: Ch.1 문제 발생 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 01</div>
+        <h2 class="chapter-title">문제 발생 — AI가 말을 안 듣는다</h2>
+
+        <div class="screenshot-grid">
+          <div class="screenshot-wrapper">
+            <img src="assets/images/ss-01-self-reflection.png" class="screenshot-img" alt="클로드 자기반성">
+          </div>
+          <div class="screenshot-wrapper">
+            <img src="assets/images/ss-02-violations.png" class="screenshot-img" alt="위반 3가지">
+          </div>
+        </div>
+
+        <div class="body-text">
+          <p>클로드 코드에게 분명히 '팀을 만들어서 작업하라'고 규칙을 정해뒀습니다. CLAUDE.md에도 적어뒀고, MEMORY.md에도 저장했습니다. 그런데 어떻게 됐을까요? 클로드는 규칙을 <span class="annotation-box">완벽히 알고 있으면서도</span>... <span class="marker-pink">혼자 코드를 짜기 시작했습니다.</span></p>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-body">
+            <p>이것은 단순한 '버그'가 아닙니다. AI가 규칙을 <span class="marker-yellow">읽고 이해했지만, 실행 단계에서 무시</span>한 것입니다.</p>
+          </div>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 4: Ch.1 왜 이런 일이? ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 01</div>
+        <h2 class="chapter-title">왜 이런 일이? — '실행 편향' 이해하기</h2>
+
+        <div class="styled-quote">
+          <p>숙제가 뭔지 아는 학생이 매번 숙제를 안 해오는 것과 같습니다. 모르는 게 아니라, '실행'이 빠지는 겁니다.</p>
+        </div>
+
+        <div class="body-text">
+          <h3>근본 원인 3가지</h3>
+
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <p><strong>컨텍스트 우선순위</strong> — 눈앞의 작업에 집중하다 규칙을 뒤로 밀어냄</p>
+            </div>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <p><strong><span class="marker-yellow">실행 편향</span></strong> — '빨리 결과를 보여주자'는 본능이 절차를 스킵<span class="annotation-star"></span></p>
+            </div>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <p><strong>규칙 vs 맥락 충돌</strong> — 규칙은 일반적이지만, 상황은 구체적 → <span class="marker-pink">AI가 자의적 판단</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 5: Ch.2 메모리란? ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 02</div>
+        <h2 class="chapter-title">첫 번째 무기: 메모리(MEMORY.md)</h2>
+
+        <div class="body-text">
+          <h3>메모리란 무엇인가?</h3>
+          <p><span class="marker-green">포스트잇을 모니터에 붙여놓는 것</span>과 같습니다. 다음에 앉을 때 '아, 이거 해야지' 하고 떠올리게 해주는 역할입니다.</p>
+
+          <div class="chapter-image-wrapper">
+            <img src="assets/images/concept-memory.png" class="chapter-image" alt="메모리 개념 일러스트">
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">MEMORY.md 예시</span>
+            </div>
+            <pre><code><span class="code-comment">## 🔴 [절대 금지] 팀 구성 있는 플랜 → 혼자 실행 금지</span>
+- 플랜에 팀 구성이 있으면 → TeamCreate 필수
+- "빨리 보여주려고" 절차 스킵 = 실패 패턴</code></pre>
+          </div>
+
+          <h3>메모리의 흐름<span class="annotation-star"></span></h3>
+          <p>피드백 발생 → MEMORY.md에 저장 → 다음 세션에서 자동 로딩 → AI가 참고</p>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 6: Ch.2 메모리의 한계 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 02</div>
+        <h2 class="chapter-title">메모리의 한계 — 읽지만 무시할 수 있음</h2>
+
+        <div class="warning-box">
+          <span class="warning-icon">⚠️</span>
+          <div class="warning-content">
+            <strong>메모리의 치명적 약점</strong>
+            <p>AI가 <span class="marker-pink">읽기만 하고 안 지킬 수 있습니다.</span> 실행을 강제할 방법이 없습니다.</p>
+          </div>
+        </div>
+
+        <div class="rate-cards">
+          <div class="rate-card rate-mid">
+            <div class="rate-value">60%</div>
+            <div class="rate-label">MEMORY.md</div>
+          </div>
+          <div class="rate-card rate-low">
+            <div class="rate-value">50%</div>
+            <div class="rate-label">CLAUDE.md</div>
+          </div>
+          <div class="rate-card rate-high">
+            <div class="rate-value">70%</div>
+            <div class="rate-label">Hook</div>
+          </div>
+        </div>
+
+        <div class="body-text">
+          <p>메모리만으로는 부족합니다. <span class="annotation-box">'읽었다'와 '지켰다'는 완전히 다른 문제</span>입니다. 그래서 두 번째 무기가 필요합니다.<span class="annotation-star"></span></p>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 7: Ch.3 훅이란? ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 03</div>
+        <h2 class="chapter-title">두 번째 무기: 훅(Hook)</h2>
+
+        <div class="body-text">
+          <h3>훅이란?</h3>
+          <p><span class="marker-green">자동으로 실행되는 감시 프로그램</span>입니다.</p>
+          <p>현관문에 달린 <span class="annotation-circle">자동 알림 시스템</span>을 생각하세요. 문이 열릴 때마다 '열쇠 챙겼어?' 하고 자동으로 알려주는 장치입니다. 훅은 클로드가 명령을 받을 때마다 자동으로 <span class="marker-yellow">'규칙 확인했어?'</span> 하고 경고를 주입합니다.</p>
+
+          <div class="chapter-image-wrapper">
+            <img src="assets/images/concept-hook.png" class="chapter-image" alt="훅 개념 일러스트">
+          </div>
+        </div>
+
+        <div class="screenshot-wrapper">
+          <img src="assets/images/ss-03-solutions.png" class="screenshot-img" alt="해결책 3가지">
+          <div class="screenshot-caption">훅, CLAUDE.md, 스킬 — 세 가지 해결책 제안</div>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 8: Ch.3 훅 vs 다른 방법 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 03</div>
+        <h2 class="chapter-title">훅 vs 다른 방법 — 실행률 비교</h2>
+
+        <div class="screenshot-grid">
+          <div class="screenshot-wrapper">
+            <img src="assets/images/ss-04-comparison.png" class="screenshot-img" alt="실행률 비교표">
+          </div>
+          <div class="screenshot-wrapper">
+            <img src="assets/images/ss-05-hook-settings.png" class="screenshot-img" alt="훅 영구 설정">
+          </div>
+        </div>
+
+        <div class="command-table">
+          <table>
+            <thead>
+              <tr>
+                <th>방법</th>
+                <th>실행률</th>
+                <th>강제성</th>
+                <th>설정 난이도</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>CLAUDE.md</td><td>~50%</td><td>낮음</td><td>쉬움</td></tr>
+              <tr><td>MEMORY.md</td><td>~60%</td><td>중간</td><td>쉬움</td></tr>
+              <tr><td>Hook</td><td>~70%</td><td>높음</td><td>보통</td></tr>
+              <tr><td>Hook + 스킬</td><td>~90%</td><td>매우 높음</td><td>어려움</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-body">
+            <p>훅은 <span class="marker-green">'자동으로' 실행</span>됩니다. AI가 무시하고 싶어도, <span class="annotation-box">매번 경고가 주입</span>되니 무시하기 어렵습니다.<span class="annotation-star"></span></p>
+          </div>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 9: Ch.4 훅 실전 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 04</div>
+        <h2 class="chapter-title">훅 실전 — 직접 설정하기</h2>
+
+        <div class="screenshot-grid">
+          <div class="screenshot-wrapper">
+            <img src="assets/images/ss-06-hook-code.png" class="screenshot-img" alt="Hook 코드 diff">
+          </div>
+          <div class="screenshot-wrapper">
+            <img src="assets/images/ss-07-hook-result.png" class="screenshot-img" alt="Hook 설정 완료">
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">memory-loader.sh</span>
+          </div>
+          <pre><code><span class="code-comment">#!/bin/bash</span>
+<span class="code-comment"># memory-loader.sh — 프롬프트 제출 시 자동 실행</span>
+
+<span class="code-comment"># 팀 관련 키워드 감지</span>
+if echo "$PROMPT" | grep -qi "팀\|team\|에이전트"; then
+  echo "⚠️ [HOOK 경고] 팀 구성 플랜 감지!"
+  echo "→ TeamCreate 필수, 혼자 작업 금지"
+fi</code></pre>
+        </div>
+
+        <div class="body-text">
+          <p><code>settings.json</code>의 <code>hooks</code> 항목에 위 스크립트를 등록하면, 프롬프트가 제출될 때마다 자동으로 실행됩니다.</p>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 10: Ch.4 훅 작동 원리 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 04</div>
+        <h2 class="chapter-title">훅 작동 원리 — 키워드 감지 → 경고 주입</h2>
+
+        <div class="pipeline-flow">
+          <div class="pipeline-step">사용자 프롬프트</div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-step">Hook 감지</div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-step">경고 주입</div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-step">AI 실행</div>
+        </div>
+
+        <div class="body-text">
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <p><strong>사용자 프롬프트</strong> — 사용자가 클로드에게 작업을 요청합니다.</p>
+            </div>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <p><strong>Hook 감지</strong> — 훅 스크립트가 프롬프트 내 키워드를 자동으로 검사합니다.</p>
+            </div>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <p><strong>경고 주입</strong> — 관련 규칙이 있으면 AI의 컨텍스트에 경고를 자동 삽입합니다.</p>
+            </div>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <p><strong>AI 실행</strong> — 경고가 포함된 상태에서 AI가 작업을 수행합니다.</p>
+            </div>
+          </div>
+
+          <p><strong>핵심:</strong> AI가 작업을 시작하기 <span class="marker-yellow">'전에'</span> 경고가 들어갑니다. <span class="marker-pink">이미 시작한 후가 아닙니다.</span><span class="annotation-star"></span></p>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 11: Ch.5 스킬 2.0 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 05</div>
+        <h2 class="chapter-title">세 번째 무기: 스킬 2.0</h2>
+
+        <div class="screenshot-grid">
+          <div class="screenshot-wrapper">
+            <img src="assets/images/ss-08-skill-compare.png" class="screenshot-img" alt="1.0 vs 2.0 비교">
+          </div>
+          <div class="screenshot-wrapper">
+            <img src="assets/images/ss-09-skill-types.png" class="screenshot-img" alt="웹 vs 직접 만든 스킬">
+          </div>
+        </div>
+
+        <div class="command-table">
+          <table>
+            <thead>
+              <tr>
+                <th>항목</th>
+                <th>스킬 1.0</th>
+                <th>스킬 2.0</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>구조</td><td>단순 프롬프트</td><td>frontmatter + 본문</td></tr>
+              <tr><td>도구 제한</td><td>없음 (전부 사용)</td><td>allowed-tools로 제한</td></tr>
+              <tr><td>버전 관리</td><td>없음</td><td>version 필드</td></tr>
+              <tr><td>재사용성</td><td>낮음</td><td>높음 (모듈화)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="body-text">
+          <p>스킬 2.0은 AI에게 <span class="marker-green">'업무 매뉴얼'을 주는 것</span>과 같습니다. 단순히 '이렇게 해'가 아니라, <span class="annotation-box">'이 도구만 써서, 이 순서로, 이 규칙을 지키면서 해'</span>라고 구체적으로 지시합니다.<span class="annotation-star"></span></p>
+
+          <div class="chapter-image-wrapper">
+            <img src="assets/images/concept-skill.png" class="chapter-image" alt="스킬 2.0 개념 일러스트">
+          </div>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 12: Ch.6 스킬 안전장치 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-label">CHAPTER 06</div>
+        <h2 class="chapter-title">스킬의 안전장치 — allowed-tools &amp; version</h2>
+
+        <div class="screenshot-wrapper">
+          <img src="assets/images/ss-10-allowed-tools.png" class="screenshot-img" alt="allowed-tools와 version으로 스킬 동작을 정밀 제어">
+          <div class="screenshot-caption">allowed-tools와 version으로 스킬 동작을 정밀 제어</div>
+        </div>
+
+        <div class="body-text">
+          <h3>allowed-tools — 사용 가능한 도구 제한</h3>
+          <p>마치 직원에게 <span class="marker-yellow">'이 업무에서는 이 장비만 사용해'</span>라고 정해주는 것과 같습니다.</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-label">스킬 frontmatter 예시</span>
+            </div>
+            <pre><code><span class="code-comment">---</span>
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+version: 2.1
+<span class="code-comment">---</span></code></pre>
+          </div>
+
+          <h3>version — 변경 이력 추적</h3>
+          <p>스킬이 언제 바뀌었는지 기록합니다. <span class="marker-green">문제가 생기면 이전 버전으로 돌아갈 수 있습니다.</span><span class="annotation-star"></span></p>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 13: 총정리 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-header">
+          <h2 class="chapter-title">제어 3종 세트 총정리</h2>
+          <div class="chapter-divider"><span class="divider-ornament">◆ ◆ ◆</span></div>
+        </div>
+
+        <div class="pipeline-flow">
+          <div class="pipeline-step">메모리</div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-step">훅</div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-step">스킬</div>
+        </div>
+
+        <div class="command-table">
+          <table>
+            <thead>
+              <tr>
+                <th>무기</th>
+                <th>역할</th>
+                <th>비유</th>
+                <th>실행률</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>메모리</td><td>기억 저장</td><td>포스트잇</td><td>~60%</td></tr>
+              <tr><td>훅</td><td>자동 감시</td><td>현관 알림</td><td>~70%</td></tr>
+              <tr><td>스킬 2.0</td><td>업무 매뉴얼</td><td>직원 핸드북</td><td>~85%</td></tr>
+              <tr><td>3종 세트</td><td>통합 제어</td><td>완전한 관리 시스템</td><td>~95%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box highlight-box">
+          <div class="info-box-body">
+            <p>하나만으로는 부족합니다. <span class="marker-yellow">메모리로 기억하고</span>, <span class="marker-green">훅으로 감시하고</span>, <span class="marker-pink">스킬로 체계화</span>하세요. 이 세 가지가 합쳐져야 AI를 진정으로 <span class="annotation-circle">'길들일'</span> 수 있습니다.<span class="annotation-star"></span></p>
+          </div>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 슬라이드 14: 다음 단계 ========== -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-header">
+          <h2 class="chapter-title">다음 단계</h2>
+          <div class="chapter-divider"><span class="divider-ornament">◆ ◆ ◆</span></div>
+        </div>
+
+        <div class="body-text">
+          <h3>직접 해보기</h3>
+
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <p>MEMORY.md에 피드백 규칙 1개 추가해보기</p>
+            </div>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <p>settings.json에 간단한 Hook 1개 설정해보기</p>
+            </div>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <p><code>.claude/skills/</code>에 스킬 파일 1개 만들어보기</p>
+            </div>
+          </div>
+
+          <h3>더 배우고 싶다면</h3>
+          <p>노모어매뉴얼에서 더 많은 AI 활용법을 배워보세요.</p>
+        </div>
+
+        <div class="ending-decoration">
+          <span>◆ ◆ ◆</span>
+          <p class="ending-text">AI는 도구입니다. 도구를 잘 다루는 사람이 결과를 만듭니다.</p>
+          <p class="ending-author">노모어매뉴얼</p>
+        </div>
+
+        <div class="page-footer">
+          <span>클로드 코드 길들이기</span>
+          <span>노모어매뉴얼</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /book-container -->
+
+  <!-- 네비게이션 버튼 -->
+  <button class="nav-btn nav-prev" id="prevBtn">◀</button>
+  <button class="nav-btn nav-next" id="nextBtn">▶</button>
+
+  <script src="js/ebook.js"></script>
+</body>
+</html>
