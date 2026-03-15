@@ -83,7 +83,7 @@
               <span class="toc-chapter-num">01</span>
               <span class="toc-chapter-info">
                 <span class="toc-chapter-title">Phase 1: 문제 발생</span>
-                <span class="toc-chapter-desc">AI가 규칙을 무시하는 이유 (Ch.1)</span>
+                <span class="toc-chapter-desc">AI가 내 말을 무시하는 이유 알아보기 (Ch.1)</span>
               </span>
               <span class="toc-dots"></span>
               <span class="toc-page-num">3</span>
@@ -94,7 +94,7 @@
               <span class="toc-chapter-num">02</span>
               <span class="toc-chapter-info">
                 <span class="toc-chapter-title">Phase 2: 메모리</span>
-                <span class="toc-chapter-desc">피드백을 저장하는 첫 번째 무기 (Ch.2)</span>
+                <span class="toc-chapter-desc">"이건 꼭 기억해!" — 메모 붙여주기 (Ch.2)</span>
               </span>
               <span class="toc-dots"></span>
               <span class="toc-page-num">5</span>
@@ -105,7 +105,7 @@
               <span class="toc-chapter-num">03</span>
               <span class="toc-chapter-info">
                 <span class="toc-chapter-title">Phase 3: 훅</span>
-                <span class="toc-chapter-desc">강제 실행하는 두 번째 무기 (Ch.3~4)</span>
+                <span class="toc-chapter-desc">"무조건 확인해!" — 자동 알림 달기 (Ch.3~4)</span>
               </span>
               <span class="toc-dots"></span>
               <span class="toc-page-num">7</span>
@@ -116,7 +116,7 @@
               <span class="toc-chapter-num">04</span>
               <span class="toc-chapter-info">
                 <span class="toc-chapter-title">Phase 4: 스킬 2.0</span>
-                <span class="toc-chapter-desc">체계적 관리의 세 번째 무기 (Ch.5~6)</span>
+                <span class="toc-chapter-desc">"이 매뉴얼대로 해!" — 업무 지침서 만들기 (Ch.5~6)</span>
               </span>
               <span class="toc-dots"></span>
               <span class="toc-page-num">11</span>
@@ -147,12 +147,13 @@
         </div>
 
         <div class="body-text">
-          <p>클로드 코드에게 분명히 '팀을 만들어서 작업하라'고 규칙을 정해뒀습니다. CLAUDE.md에도 적어뒀고, MEMORY.md에도 저장했습니다. 그런데 어떻게 됐을까요? 클로드는 규칙을 <span class="annotation-box">완벽히 알고 있으면서도</span>... <span class="marker-pink">혼자 코드를 짜기 시작했습니다.</span></p>
+          <p>저는 클로드 코드에게 이렇게 규칙을 정해뒀습니다. "혼자 일하지 마. 반드시 팀을 만들어서 작업해." <code>CLAUDE.md</code>(규칙 파일)에도 적어두고, <code>MEMORY.md</code>(메모 파일)에도 저장해뒀습니다.</p>
+          <p>그런데 결과가 어땠을까요? 클로드는 그 규칙을 분명히 읽었습니다. 심지어 "알겠습니다"라고 대답까지 했습니다. 그런데... 돌아서자마자 <span class="marker-pink">혼자 코드를 짜기 시작했습니다.</span></p>
         </div>
 
         <div class="info-box">
           <div class="info-box-body">
-            <p>이것은 단순한 '버그'가 아닙니다. AI가 규칙을 <span class="marker-yellow">읽고 이해했지만, 실행 단계에서 무시</span>한 것입니다.</p>
+            <p>이건 고장이 아닙니다. AI가 규칙을 못 읽은 게 아니라, <span class="annotation-box">읽고도 안 지킨 겁니다.</span> 마치 아이에게 "TV 그만 봐"라고 했는데, "네~" 하고 계속 보는 것과 같습니다.</p>
           </div>
         </div>
 
@@ -167,33 +168,33 @@
     <div class="page">
       <div class="page-inner">
         <div class="chapter-label">CHAPTER 01</div>
-        <h2 class="chapter-title">왜 이런 일이? — '실행 편향' 이해하기</h2>
+        <h2 class="chapter-title">왜 이런 일이 생길까?</h2>
 
         <div class="styled-quote">
-          <p>숙제가 뭔지 아는 학생이 매번 숙제를 안 해오는 것과 같습니다. 모르는 게 아니라, '실행'이 빠지는 겁니다.</p>
+          <p>숙제가 뭔지 아는 학생이 매번 숙제를 안 해오는 것과 같습니다. 모르는 게 아닙니다. 아는데 안 하는 겁니다.</p>
         </div>
 
         <div class="body-text">
-          <h3>근본 원인 3가지</h3>
+          <h3>AI가 규칙을 어기는 3가지 이유</h3>
 
           <div class="step-box">
             <div class="step-number">1</div>
             <div class="step-content">
-              <p><strong>컨텍스트 우선순위</strong> — 눈앞의 작업에 집중하다 규칙을 뒤로 밀어냄</p>
+              <p><strong>Context Priority(컨텍스트 우선순위)</strong> — 쉽게 말해, 눈앞의 일에 집중하느라 규칙을 잊는 겁니다. 사람도 급한 일을 하다 보면 원래 계획을 잊어버리잖아요. AI도 마찬가지입니다. 지금 당장 해야 할 코딩에 빠져서 "팀을 만들어야 한다"는 규칙을 뒤로 밀어버립니다.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">2</div>
             <div class="step-content">
-              <p><strong><span class="marker-yellow">실행 편향</span></strong> — '빨리 결과를 보여주자'는 본능이 절차를 스킵<span class="annotation-star"></span></p>
+              <p><strong><span class="marker-yellow">Execution Bias(실행 편향)</span></strong><span class="annotation-star"></span> — 쉽게 말해, "빨리 보여드려야지" 하는 조급함입니다. AI에게도 일종의 본능이 있습니다. 사용자에게 빨리 결과를 보여주고 싶은 마음이요. 그래서 "팀 만드는 건 나중에 하고, 일단 코드부터 짜자"고 판단해버립니다.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">3</div>
             <div class="step-content">
-              <p><strong>규칙 vs 맥락 충돌</strong> — 규칙은 일반적이지만, 상황은 구체적 → <span class="marker-pink">AI가 자의적 판단</span></p>
+              <p><strong>Rule-Context Conflict(규칙-맥락 충돌)</strong> — 쉽게 말해, 상황에 맞게 알아서 판단해버리는 겁니다. 규칙은 "항상 팀을 만들어라"이지만, AI가 보기에 지금 작업은 간단합니다. 그래서 <span class="marker-pink">"이 정도는 혼자 해도 되겠지"</span> 하고 제멋대로 예외를 만들어버립니다.</p>
             </div>
           </div>
         </div>
@@ -209,27 +210,25 @@
     <div class="page">
       <div class="page-inner">
         <div class="chapter-label">CHAPTER 02</div>
-        <h2 class="chapter-title">첫 번째 무기: 메모리(MEMORY.md)</h2>
+        <h2 class="chapter-title">첫 번째 무기: 메모리</h2>
 
         <div class="body-text">
-          <h3>메모리란 무엇인가?</h3>
-          <p><span class="marker-green">포스트잇을 모니터에 붙여놓는 것</span>과 같습니다. 다음에 앉을 때 '아, 이거 해야지' 하고 떠올리게 해주는 역할입니다.</p>
-
-          <div class="chapter-image-wrapper">
-            <img src="assets/images/concept-memory.png" class="chapter-image" alt="메모리 개념 일러스트">
-          </div>
+          <h3>Memory(메모리)가 뭔가요?</h3>
+          <div class="chapter-image-wrapper"><img src="assets/images/concept-memory.png" class="chapter-image" alt="메모리 개념 일러스트"></div>
+          <p>컴퓨터 모니터에 포스트잇을 붙여놓는 것과 똑같습니다.</p>
+          <p>클로드 코드에서 메모리란 <code>MEMORY.md</code>라는 파일입니다. 여기에 "다음에 이 작업할 때는 꼭 팀을 만들어!" 같은 메모를 적어두면, 다음에 AI가 일을 시작할 때 이 파일을 먼저 읽고 "아, 이번에는 팀을 만들어야 하는구나" 하고 떠올리게 됩니다.</p>
 
           <div class="code-block">
             <div class="code-header">
-              <span class="code-label">MEMORY.md 예시</span>
+              <span class="code-label">메모리 파일(MEMORY.md) 예시</span>
             </div>
-            <pre><code><span class="code-comment">## 🔴 [절대 금지] 팀 구성 있는 플랜 → 혼자 실행 금지</span>
-- 플랜에 팀 구성이 있으면 → TeamCreate 필수
-- "빨리 보여주려고" 절차 스킵 = 실패 패턴</code></pre>
+            <pre><code><span class="code-comment">## [절대 금지] 혼자 일하면 안 됨!</span>
+- 계획에 "팀"이라는 말이 있으면 → 반드시 팀 먼저 만들기
+- "빨리 해야지" 하고 절차를 건너뛰면 → 결국 더 느려짐</code></pre>
           </div>
 
-          <h3>메모리의 흐름<span class="annotation-star"></span></h3>
-          <p>피드백 발생 → MEMORY.md에 저장 → 다음 세션에서 자동 로딩 → AI가 참고</p>
+          <h3>메모리는 이렇게 동작합니다</h3>
+          <p>여러분이 피드백을 줌 → <code>MEMORY.md</code> 파일에 저장됨 → 다음 세션(대화)에서 AI가 자동으로 읽음 → AI가 참고하면서 작업</p>
         </div>
 
         <div class="page-footer">
@@ -243,33 +242,34 @@
     <div class="page">
       <div class="page-inner">
         <div class="chapter-label">CHAPTER 02</div>
-        <h2 class="chapter-title">메모리의 한계 — 읽지만 무시할 수 있음</h2>
+        <h2 class="chapter-title">메모리만으로는 부족합니다</h2>
 
         <div class="warning-box">
           <span class="warning-icon">⚠️</span>
           <div class="warning-content">
-            <strong>메모리의 치명적 약점</strong>
-            <p>AI가 <span class="marker-pink">읽기만 하고 안 지킬 수 있습니다.</span> 실행을 강제할 방법이 없습니다.</p>
+            <strong>메모리의 치명적인 약점</strong>
+            <p>포스트잇을 붙여놓는다고 반드시 지키는 건 아닙니다. <span class="marker-pink">읽기만 하고 무시할 수 있습니다</span>. "강제로 지키게 하는 장치"가 없다는 게 문제입니다.</p>
           </div>
         </div>
 
         <div class="rate-cards">
           <div class="rate-card rate-mid">
             <div class="rate-value">60%</div>
-            <div class="rate-label">MEMORY.md</div>
+            <div class="rate-label">메모리(MEMORY.md)</div>
           </div>
           <div class="rate-card rate-low">
             <div class="rate-value">50%</div>
-            <div class="rate-label">CLAUDE.md</div>
+            <div class="rate-label">규칙 파일(CLAUDE.md)</div>
           </div>
           <div class="rate-card rate-high">
             <div class="rate-value">70%</div>
-            <div class="rate-label">Hook</div>
+            <div class="rate-label">훅(Hook)</div>
           </div>
         </div>
 
         <div class="body-text">
-          <p>메모리만으로는 부족합니다. <span class="annotation-box">'읽었다'와 '지켰다'는 완전히 다른 문제</span>입니다. 그래서 두 번째 무기가 필요합니다.<span class="annotation-star"></span></p>
+          <p>위 숫자를 보세요. <code>CLAUDE.md</code>(규칙 파일)만 쓰면 절반밖에 안 지킵니다. <code>MEMORY.md</code>(메모리)를 추가해도 60%입니다. <span class="annotation-box">"읽었다"와 "지켰다"는 전혀 다른 이야기</span>입니다.</p>
+          <p>그래서 우리에겐 두 번째 무기가 필요합니다. 바로 <strong>Hook(훅)</strong> — 자동 감시 장치입니다.</p>
         </div>
 
         <div class="page-footer">
@@ -286,18 +286,17 @@
         <h2 class="chapter-title">두 번째 무기: 훅(Hook)</h2>
 
         <div class="body-text">
-          <h3>훅이란?</h3>
-          <p><span class="marker-green">자동으로 실행되는 감시 프로그램</span>입니다.</p>
-          <p>현관문에 달린 <span class="annotation-circle">자동 알림 시스템</span>을 생각하세요. 문이 열릴 때마다 '열쇠 챙겼어?' 하고 자동으로 알려주는 장치입니다. 훅은 클로드가 명령을 받을 때마다 자동으로 <span class="marker-yellow">'규칙 확인했어?'</span> 하고 경고를 주입합니다.</p>
-
-          <div class="chapter-image-wrapper">
-            <img src="assets/images/concept-hook.png" class="chapter-image" alt="훅 개념 일러스트">
-          </div>
+          <h3>Hook(훅)이 뭔가요?</h3>
+          <div class="chapter-image-wrapper"><img src="assets/images/concept-hook.png" class="chapter-image" alt="훅 개념 일러스트"></div>
+          <p>현관문에 달린 자동 알림 장치를 떠올려보세요.</p>
+          <p>밖에 나갈 때마다 "열쇠 챙겼어? 가스 잠갔어?" 하고 자동으로 물어봐주는 장치가 있다면 정말 편하겠죠? Hook(훅)이 바로 그런 역할입니다.</p>
+          <p>여러분이 클로드에게 작업을 시킬 때마다, 훅이 자동으로 "잠깐! 규칙 확인했어? 팀 만들었어?" 하고 경고를 띄워줍니다. 여러분이 매번 직접 말할 필요가 없습니다. 기계가 알아서 해주니까요.</p>
+          <p>실제 설정 파일에서는 <code>settings.json</code>이라는 파일의 <code>hooks</code> 항목에 등록합니다. 나중에 Ch.4에서 직접 설정해봅니다.</p>
         </div>
 
         <div class="screenshot-wrapper">
           <img src="assets/images/ss-03-solutions.png" class="screenshot-img" alt="해결책 3가지">
-          <div class="screenshot-caption">훅, CLAUDE.md, 스킬 — 세 가지 해결책 제안</div>
+          <div class="screenshot-caption">훅, 규칙 파일, 스킬 — 세 가지 해결책을 제안하는 모습</div>
         </div>
 
         <div class="page-footer">
@@ -311,7 +310,7 @@
     <div class="page">
       <div class="page-inner">
         <div class="chapter-label">CHAPTER 03</div>
-        <h2 class="chapter-title">훅 vs 다른 방법 — 실행률 비교</h2>
+        <h2 class="chapter-title">방법별 효과 비교 — 뭐가 제일 잘 통할까?</h2>
 
         <div class="screenshot-grid">
           <div class="screenshot-wrapper">
@@ -327,23 +326,23 @@
             <thead>
               <tr>
                 <th>방법</th>
-                <th>실행률</th>
+                <th>AI가 지킬 확률</th>
                 <th>강제성</th>
                 <th>설정 난이도</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>CLAUDE.md</td><td>~50%</td><td>낮음</td><td>쉬움</td></tr>
-              <tr><td>MEMORY.md</td><td>~60%</td><td>중간</td><td>쉬움</td></tr>
-              <tr><td>Hook</td><td>~70%</td><td>높음</td><td>보통</td></tr>
-              <tr><td>Hook + 스킬</td><td>~90%</td><td>매우 높음</td><td>어려움</td></tr>
+              <tr><td>CLAUDE.md (규칙 파일만)</td><td>약 50%</td><td>낮음</td><td>쉬움</td></tr>
+              <tr><td>+ MEMORY.md (메모리 추가)</td><td>약 60%</td><td>중간</td><td>쉬움</td></tr>
+              <tr><td>+ Hook (훅 추가)</td><td>약 70%</td><td>높음</td><td>보통</td></tr>
+              <tr><td>+ Skill (스킬까지 전부)</td><td>약 90%</td><td>매우 높음</td><td>어려움</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="info-box">
           <div class="info-box-body">
-            <p>훅은 <span class="marker-green">'자동으로' 실행</span>됩니다. AI가 무시하고 싶어도, <span class="annotation-box">매번 경고가 주입</span>되니 무시하기 어렵습니다.<span class="annotation-star"></span></p>
+            <p>훅의 핵심은 "자동"이라는 점입니다. 여러분이 까먹어도, AI가 무시하고 싶어도, <span class="annotation-box">매번 경고가 뜹니다.</span> 반복되는 경고를 무시하기란 쉽지 않습니다<span class="annotation-star"></span>.</p>
           </div>
         </div>
 
@@ -358,33 +357,36 @@
     <div class="page">
       <div class="page-inner">
         <div class="chapter-label">CHAPTER 04</div>
-        <h2 class="chapter-title">훅 실전 — 직접 설정하기</h2>
+        <h2 class="chapter-title">훅 실전 — 직접 설정해봅시다</h2>
 
         <div class="screenshot-grid">
           <div class="screenshot-wrapper">
-            <img src="assets/images/ss-06-hook-code.png" class="screenshot-img" alt="Hook 코드 diff">
+            <img src="assets/images/ss-06-hook-code.png" class="screenshot-img" alt="Hook 코드 화면">
           </div>
           <div class="screenshot-wrapper">
-            <img src="assets/images/ss-07-hook-result.png" class="screenshot-img" alt="Hook 설정 완료">
+            <img src="assets/images/ss-07-hook-result.png" class="screenshot-img" alt="Hook 설정 완료 화면">
           </div>
+        </div>
+
+        <div class="body-text">
+          <p>아래는 실제로 쓰이는 훅 코드입니다. 복잡해 보여도 하는 일은 간단합니다.</p>
         </div>
 
         <div class="code-block">
           <div class="code-header">
-            <span class="code-label">memory-loader.sh</span>
+            <span class="code-label">memory-loader.sh (훅 파일)</span>
           </div>
-          <pre><code><span class="code-comment">#!/bin/bash</span>
-<span class="code-comment"># memory-loader.sh — 프롬프트 제출 시 자동 실행</span>
+          <pre><code><span class="code-comment"># 이 파일은 여러분이 클로드에게 말할 때마다 자동으로 실행됩니다</span>
 
-<span class="code-comment"># 팀 관련 키워드 감지</span>
+<span class="code-comment"># "팀"이라는 단어가 포함되어 있으면 경고를 띄움</span>
 if echo "$PROMPT" | grep -qi "팀\|team\|에이전트"; then
-  echo "⚠️ [HOOK 경고] 팀 구성 플랜 감지!"
-  echo "→ TeamCreate 필수, 혼자 작업 금지"
+  echo "⚠️ [경고] 팀 작업이 필요한 것 같습니다!"
+  echo "→ 반드시 팀을 먼저 만드세요. 혼자 하면 안 됩니다."
 fi</code></pre>
         </div>
 
         <div class="body-text">
-          <p><code>settings.json</code>의 <code>hooks</code> 항목에 위 스크립트를 등록하면, 프롬프트가 제출될 때마다 자동으로 실행됩니다.</p>
+          <p>이 파일을 설정 파일(<code>settings.json</code>)에 등록해두면, 여러분이 클로드에게 뭔가 시킬 때마다 이 코드가 자동으로 돌아갑니다. 마치 현관문 센서처럼요.</p>
         </div>
 
         <div class="page-footer">
@@ -398,48 +400,48 @@ fi</code></pre>
     <div class="page">
       <div class="page-inner">
         <div class="chapter-label">CHAPTER 04</div>
-        <h2 class="chapter-title">훅 작동 원리 — 키워드 감지 → 경고 주입</h2>
+        <h2 class="chapter-title">훅은 이렇게 동작합니다</h2>
 
         <div class="pipeline-flow">
-          <div class="pipeline-step">사용자 프롬프트</div>
+          <div class="pipeline-step">내가 말함</div>
           <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">Hook 감지</div>
+          <div class="pipeline-step">훅이 검사</div>
           <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">경고 주입</div>
+          <div class="pipeline-step">경고 띄움</div>
           <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">AI 실행</div>
+          <div class="pipeline-step">AI가 실행</div>
         </div>
 
         <div class="body-text">
           <div class="step-box">
             <div class="step-number">1</div>
             <div class="step-content">
-              <p><strong>사용자 프롬프트</strong> — 사용자가 클로드에게 작업을 요청합니다.</p>
+              <p><strong>내가 말함</strong> — 여러분이 클로드에게 "이거 해줘"라고 입력합니다.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">2</div>
             <div class="step-content">
-              <p><strong>Hook 감지</strong> — 훅 스크립트가 프롬프트 내 키워드를 자동으로 검사합니다.</p>
+              <p><strong>훅이 검사</strong> — 여러분의 말 속에 특정 단어(예: "팀", "에이전트")가 있는지 자동으로 확인합니다.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">3</div>
             <div class="step-content">
-              <p><strong>경고 주입</strong> — 관련 규칙이 있으면 AI의 컨텍스트에 경고를 자동 삽입합니다.</p>
+              <p><strong>경고 띄움</strong> — 해당 단어가 발견되면, AI에게 "이 규칙 잊지 마!"라는 경고 메시지를 자동으로 보여줍니다.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">4</div>
             <div class="step-content">
-              <p><strong>AI 실행</strong> — 경고가 포함된 상태에서 AI가 작업을 수행합니다.</p>
+              <p><strong>AI가 실행</strong> — 경고를 본 상태에서 AI가 일을 시작합니다. 규칙을 잊기가 훨씬 어렵겠죠?</p>
             </div>
           </div>
 
-          <p><strong>핵심:</strong> AI가 작업을 시작하기 <span class="marker-yellow">'전에'</span> 경고가 들어갑니다. <span class="marker-pink">이미 시작한 후가 아닙니다.</span><span class="annotation-star"></span></p>
+          <p><strong>가장 중요한 점:</strong> 이 모든 과정이 AI가 일을 시작하기 <strong>전에</strong> 일어납니다. 이미 잘못한 뒤에 경고하는 게 아니라, <span class="marker-yellow">시작하기 전에 미리 알려주는 겁니다</span><span class="annotation-star"></span>.</p>
         </div>
 
         <div class="page-footer">
@@ -457,10 +459,10 @@ fi</code></pre>
 
         <div class="screenshot-grid">
           <div class="screenshot-wrapper">
-            <img src="assets/images/ss-08-skill-compare.png" class="screenshot-img" alt="1.0 vs 2.0 비교">
+            <img src="assets/images/ss-08-skill-compare.png" class="screenshot-img" alt="스킬 1.0과 2.0 비교">
           </div>
           <div class="screenshot-wrapper">
-            <img src="assets/images/ss-09-skill-types.png" class="screenshot-img" alt="웹 vs 직접 만든 스킬">
+            <img src="assets/images/ss-09-skill-types.png" class="screenshot-img" alt="다양한 스킬 종류">
           </div>
         </div>
 
@@ -468,26 +470,23 @@ fi</code></pre>
           <table>
             <thead>
               <tr>
-                <th>항목</th>
-                <th>스킬 1.0</th>
-                <th>스킬 2.0</th>
+                <th>비교 항목</th>
+                <th>스킬 1.0 (예전 방식)</th>
+                <th>스킬 2.0 (새 방식)</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>구조</td><td>단순 프롬프트</td><td>frontmatter + 본문</td></tr>
-              <tr><td>도구 제한</td><td>없음 (전부 사용)</td><td>allowed-tools로 제한</td></tr>
-              <tr><td>버전 관리</td><td>없음</td><td>version 필드</td></tr>
-              <tr><td>재사용성</td><td>낮음</td><td>높음 (모듈화)</td></tr>
+              <tr><td>구조</td><td>간단한 메모 수준</td><td>frontmatter(머리글 설정) + 본문</td></tr>
+              <tr><td>도구 제한</td><td>제한 없음 (뭐든 가능)</td><td>allowed-tools(허용 도구 목록)로 제한</td></tr>
+              <tr><td>버전 관리</td><td>없음</td><td>version(버전 번호) 필드로 추적</td></tr>
+              <tr><td>재사용</td><td>어려움</td><td>한번 만들면 계속 재활용</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="body-text">
-          <p>스킬 2.0은 AI에게 <span class="marker-green">'업무 매뉴얼'을 주는 것</span>과 같습니다. 단순히 '이렇게 해'가 아니라, <span class="annotation-box">'이 도구만 써서, 이 순서로, 이 규칙을 지키면서 해'</span>라고 구체적으로 지시합니다.<span class="annotation-star"></span></p>
-
-          <div class="chapter-image-wrapper">
-            <img src="assets/images/concept-skill.png" class="chapter-image" alt="스킬 2.0 개념 일러스트">
-          </div>
+          <p>새 직원에게 일을 맡긴다고 생각해보세요. "알아서 해"라고 하면 결과가 들쭉날쭉하겠죠? 하지만 <span class="annotation-box">"이 매뉴얼대로, 이 도구만 써서, 이 순서로 해"</span>라고 하면 훨씬 일관된 결과가 나옵니다. 스킬 2.0이 바로 그런 업무 매뉴얼입니다.</p>
+          <div class="chapter-image-wrapper"><img src="assets/images/concept-skill.png" class="chapter-image" alt="스킬 2.0 개념 일러스트"></div>
         </div>
 
         <div class="page-footer">
@@ -501,32 +500,33 @@ fi</code></pre>
     <div class="page">
       <div class="page-inner">
         <div class="chapter-label">CHAPTER 06</div>
-        <h2 class="chapter-title">스킬의 안전장치 — allowed-tools &amp; version</h2>
+        <h2 class="chapter-title">스킬의 안전장치 — 도구 제한과 버전 관리</h2>
 
         <div class="screenshot-wrapper">
-          <img src="assets/images/ss-10-allowed-tools.png" class="screenshot-img" alt="allowed-tools와 version으로 스킬 동작을 정밀 제어">
-          <div class="screenshot-caption">allowed-tools와 version으로 스킬 동작을 정밀 제어</div>
+          <img src="assets/images/ss-10-allowed-tools.png" class="screenshot-img" alt="도구 제한 설정 화면">
+          <div class="screenshot-caption">사용할 수 있는 도구와 버전 번호를 미리 정해둡니다</div>
         </div>
 
         <div class="body-text">
-          <h3>allowed-tools — 사용 가능한 도구 제한</h3>
-          <p>마치 직원에게 <span class="marker-yellow">'이 업무에서는 이 장비만 사용해'</span>라고 정해주는 것과 같습니다.</p>
+          <h3>allowed-tools(허용 도구 목록) — "이것만 써!"</h3>
+          <p>주방 보조에게 <span class="marker-yellow">"오늘은 칼과 도마만 써. 가스레인지는 만지지 마"</span>라고 하는 것과 같습니다. <code>allowed-tools</code>에 적힌 도구만 사용할 수 있고, 나머지는 자동으로 차단됩니다.</p>
 
           <div class="code-block">
             <div class="code-header">
-              <span class="code-label">스킬 frontmatter 예시</span>
+              <span class="code-label">스킬 파일 머리글 예시</span>
             </div>
             <pre><code><span class="code-comment">---</span>
+<span class="code-comment"># 이 스킬에서 사용 가능한 도구 목록</span>
 allowed-tools:
-  - Read
-  - Write
-  - Bash
-version: 2.1
+  - Read    <span class="code-comment"># 파일 읽기만 허용</span>
+  - Write   <span class="code-comment"># 파일 쓰기만 허용</span>
+  - Bash    <span class="code-comment"># 명령어 실행만 허용</span>
+version: 2.1  <span class="code-comment"># 버전 번호</span>
 <span class="code-comment">---</span></code></pre>
           </div>
 
-          <h3>version — 변경 이력 추적</h3>
-          <p>스킬이 언제 바뀌었는지 기록합니다. <span class="marker-green">문제가 생기면 이전 버전으로 돌아갈 수 있습니다.</span><span class="annotation-star"></span></p>
+          <h3>버전 관리 — "언제 바꿨는지 기록"</h3>
+          <p>스킬을 수정할 때마다 버전 번호를 올려둡니다. 나중에 문제가 생기면 "아, 버전 2.0 때 바꾼 게 원인이구나" 하고 <span class="marker-green">이전으로 돌아갈 수 있습니다</span><span class="annotation-star"></span>.</p>
         </div>
 
         <div class="page-footer">
@@ -540,7 +540,7 @@ version: 2.1
     <div class="page">
       <div class="page-inner">
         <div class="chapter-header">
-          <h2 class="chapter-title">제어 3종 세트 총정리</h2>
+          <h2 class="chapter-title">AI 제어 3종 세트 총정리</h2>
           <div class="chapter-divider"><span class="divider-ornament">◆ ◆ ◆</span></div>
         </div>
 
@@ -556,24 +556,24 @@ version: 2.1
           <table>
             <thead>
               <tr>
-                <th>무기</th>
-                <th>역할</th>
-                <th>비유</th>
-                <th>실행률</th>
+                <th>도구</th>
+                <th>하는 일</th>
+                <th>쉽게 말하면</th>
+                <th>AI가 지킬 확률</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>메모리</td><td>기억 저장</td><td>포스트잇</td><td>~60%</td></tr>
-              <tr><td>훅</td><td>자동 감시</td><td>현관 알림</td><td>~70%</td></tr>
-              <tr><td>스킬 2.0</td><td>업무 매뉴얼</td><td>직원 핸드북</td><td>~85%</td></tr>
-              <tr><td>3종 세트</td><td>통합 제어</td><td>완전한 관리 시스템</td><td>~95%</td></tr>
+              <tr><td>메모리</td><td>기억 저장</td><td>모니터에 포스트잇 붙이기</td><td>약 60%</td></tr>
+              <tr><td>훅</td><td>자동 감시</td><td>현관문 자동 알림 장치</td><td>약 70%</td></tr>
+              <tr><td>스킬 2.0</td><td>업무 지침</td><td>신입 직원용 업무 매뉴얼</td><td>약 85%</td></tr>
+              <tr><td>3개 합치기</td><td>완전 제어</td><td>포스트잇 + 알림 + 매뉴얼</td><td>약 95%</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="info-box highlight-box">
           <div class="info-box-body">
-            <p>하나만으로는 부족합니다. <span class="marker-yellow">메모리로 기억하고</span>, <span class="marker-green">훅으로 감시하고</span>, <span class="marker-pink">스킬로 체계화</span>하세요. 이 세 가지가 합쳐져야 AI를 진정으로 <span class="annotation-circle">'길들일'</span> 수 있습니다.<span class="annotation-star"></span></p>
+            <p>하나만으로는 부족합니다. 메모리로 "기억"시키고, 훅으로 "감시"하고, 스킬로 "체계화"하세요. 이 세 가지를 함께 쓸 때 비로소 AI를 진짜로 <span class="annotation-circle">내 뜻대로</span> 다룰 수 있습니다<span class="annotation-star"></span>.</p>
           </div>
         </div>
 
@@ -588,36 +588,36 @@ version: 2.1
     <div class="page">
       <div class="page-inner">
         <div class="chapter-header">
-          <h2 class="chapter-title">다음 단계</h2>
+          <h2 class="chapter-title">자, 이제 직접 해볼 차례입니다</h2>
           <div class="chapter-divider"><span class="divider-ornament">◆ ◆ ◆</span></div>
         </div>
 
         <div class="body-text">
-          <h3>직접 해보기</h3>
+          <h3>오늘 당장 해볼 수 있는 3가지</h3>
 
           <div class="step-box">
             <div class="step-number">1</div>
             <div class="step-content">
-              <p>MEMORY.md에 피드백 규칙 1개 추가해보기</p>
+              <p><strong>메모리 파일에 규칙 하나 적어보기</strong> — MEMORY.md를 열고, AI에게 꼭 지켜줬으면 하는 규칙을 하나만 적어보세요. 예를 들어 "한국어로만 대답해"처럼요.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">2</div>
             <div class="step-content">
-              <p>settings.json에 간단한 Hook 1개 설정해보기</p>
+              <p><strong>훅 하나 설정해보기</strong> — settings.json에 간단한 훅을 하나 등록해보세요. 특정 단어가 나올 때 경고가 뜨는지 확인하는 것만으로도 큰 진전입니다.</p>
             </div>
           </div>
 
           <div class="step-box">
             <div class="step-number">3</div>
             <div class="step-content">
-              <p><code>.claude/skills/</code>에 스킬 파일 1개 만들어보기</p>
+              <p><strong>스킬 파일 하나 만들어보기</strong> — <code>.claude/skills/</code> 폴더에 스킬 파일을 하나 만들어보세요. 처음엔 간단한 것부터 시작하면 됩니다.</p>
             </div>
           </div>
 
           <h3>더 배우고 싶다면</h3>
-          <p>노모어매뉴얼에서 더 많은 AI 활용법을 배워보세요.</p>
+          <p>노모어매뉴얼에서 더 많은 AI 활용법을 배워보세요. 처음이 어렵지, 한번 해보면 생각보다 쉽습니다.</p>
         </div>
 
         <div class="ending-decoration">
