@@ -502,33 +502,31 @@ fi</code></pre>
     <div class="page">
       <div class="page-inner">
         <div class="chapter-label">CHAPTER 06</div>
-        <h2 class="chapter-title">스킬의 안전장치 — 도구 제한과 버전 관리</h2>
+        <h2 class="chapter-title">스킬의 안전장치</h2>
 
-        <div class="screenshot-wrapper">
-          <img src="assets/images/ss-10-allowed-tools.png" class="screenshot-img" alt="도구 제한 설정 화면">
-          <div class="screenshot-caption">사용할 수 있는 도구와 버전 번호를 미리 정해둡니다</div>
-        </div>
-
-        <div class="body-text">
-          <h3>allowed-tools(허용 도구 목록) — "이것만 써!"</h3>
-          <p>주방 보조에게 <span class="marker-yellow">"오늘은 칼과 도마만 써. 가스레인지는 만지지 마"</span>라고 하는 것과 같습니다. <code>allowed-tools</code>에 적힌 도구만 사용할 수 있고, 나머지는 자동으로 차단됩니다.</p>
-
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-label">스킬 파일의 frontmatter(머리글 설정) 예시</span>
+        <div class="slide-two-col">
+          <div class="slide-col-left">
+            <div class="screenshot-wrapper">
+              <img src="assets/images/ss-10-allowed-tools.png" class="screenshot-img" alt="도구 제한 설정 화면">
             </div>
-            <pre><code><span class="code-comment">--- ← frontmatter 시작 표시</span>
-<span class="code-comment"># allowed-tools: 이 스킬에서 사용 가능한 도구 목록</span>
-allowed-tools:
-  - Read    <span class="code-comment"># 파일 읽기만 허용</span>
-  - Write   <span class="code-comment"># 파일 쓰기만 허용</span>
-  - Bash    <span class="code-comment"># 명령어 실행만 허용</span>
-version: 2.1  <span class="code-comment"># version: 이 스킬의 버전 번호</span>
-<span class="code-comment">--- ← frontmatter 끝 표시</span></code></pre>
           </div>
+          <div class="slide-col-right">
+            <div class="body-text">
+              <h3>allowed-tools — <span class="marker-yellow">"이것만 써!"</span></h3>
+              <p>주방 보조에게 "칼과 도마만 써. 가스레인지는 만지지 마"라고 하는 것과 같습니다.</p>
 
-          <h3>version(버전 번호) — "언제 바꿨는지 기록"</h3>
-          <p>스킬을 수정할 때마다 <code>version</code> 번호를 올려둡니다. 나중에 문제가 생기면 "아, 버전 2.0 때 바꾼 게 원인이구나" 하고 <span class="marker-green">이전으로 돌아갈 수 있습니다</span><span class="annotation-star"></span>.</p>
+              <div class="code-block">
+                <div class="code-header"><span class="code-label">스킬 머리글 예시</span></div>
+                <pre><code>allowed-tools:
+  - Read   <span class="code-comment"># 읽기만</span>
+  - Write  <span class="code-comment"># 쓰기만</span>
+version: 2.1</code></pre>
+              </div>
+
+              <h3>version — "언제 바꿨지?"</h3>
+              <p>수정할 때마다 번호를 올려두면 문제 시 <span class="marker-green">이전으로 돌아갈 수 있습니다</span><span class="annotation-star"></span></p>
+            </div>
+          </div>
         </div>
 
         <div class="page-footer">
