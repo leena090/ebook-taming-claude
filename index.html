@@ -359,36 +359,31 @@
         <div class="chapter-label">CHAPTER 04</div>
         <h2 class="chapter-title">훅 실전 — 직접 설정해봅시다</h2>
 
-        <div class="screenshot-grid">
-          <div class="screenshot-wrapper">
-            <img src="assets/images/ss-06-hook-code.png" class="screenshot-img" alt="Hook 코드 화면">
+        <div class="slide-two-col">
+          <div class="slide-col-left">
+            <div class="screenshot-wrapper">
+              <img src="assets/images/ss-06-hook-code.png" class="screenshot-img" alt="Hook 코드 화면">
+              <div class="screenshot-caption">실제 훅 코드 변경 화면</div>
+            </div>
+            <div class="screenshot-wrapper">
+              <img src="assets/images/ss-07-hook-result.png" class="screenshot-img" alt="Hook 설정 완료 화면">
+              <div class="screenshot-caption">설정 완료 + 경고 주입 결과</div>
+            </div>
           </div>
-          <div class="screenshot-wrapper">
-            <img src="assets/images/ss-07-hook-result.png" class="screenshot-img" alt="Hook 설정 완료 화면">
-          </div>
-        </div>
-
-        <div class="body-text">
-          <p>아래는 실제로 쓰이는 훅 코드입니다. 복잡해 보여도 하는 일은 간단합니다.</p>
-        </div>
-
-        <div class="code-block">
-          <div class="code-header">
-            <span class="code-label">memory-loader.sh (훅 파일)</span>
-          </div>
-          <pre><code><span class="code-comment"># 이 파일은 여러분이 클로드에게 말할 때마다 자동으로 실행됩니다</span>
-
-<span class="code-comment"># $PROMPT = 여러분이 입력한 말</span>
-<span class="code-comment"># grep = 특정 단어가 있는지 찾는 명령어</span>
-<span class="code-comment"># "팀", "team", "에이전트" 중 하나라도 있으면 → 경고!</span>
-if echo "$PROMPT" | grep -qi "팀\|team\|에이전트"; then
-  echo "⚠️ [경고] 팀 작업이 필요한 것 같습니다!"
-  echo "→ 반드시 팀을 먼저 만드세요. 혼자 하면 안 됩니다."
+          <div class="slide-col-right">
+            <div class="code-block">
+              <div class="code-header"><span class="code-label">memory-loader.sh</span></div>
+              <pre><code><span class="code-comment"># 클로드에게 말할 때마다 자동 실행</span>
+if echo "$PROMPT" | \
+  grep -qi "팀\|team"; then
+  echo "⚠️ 팀 작업 필요!"
+  echo "→ 혼자 하면 안 됩니다"
 fi</code></pre>
-        </div>
-
-        <div class="body-text">
-          <p>이 파일을 설정 파일(<code>settings.json</code>)에 등록해두면, 여러분이 클로드에게 뭔가 시킬 때마다 이 코드가 자동으로 돌아갑니다. 마치 현관문 센서처럼요.</p>
+            </div>
+            <div class="body-text">
+              <p><code>settings.json</code>에 등록하면 매번 <span class="marker-green">자동으로 실행</span>됩니다. 현관문 센서처럼요.</p>
+            </div>
+          </div>
         </div>
 
         <div class="page-footer">
@@ -459,36 +454,33 @@ fi</code></pre>
         <div class="chapter-label">CHAPTER 05</div>
         <h2 class="chapter-title">세 번째 무기: 스킬 2.0</h2>
 
-        <div class="screenshot-grid">
-          <div class="screenshot-wrapper">
-            <img src="assets/images/ss-08-skill-compare.png" class="screenshot-img" alt="스킬 1.0과 2.0 비교">
+        <div class="slide-two-col">
+          <div class="slide-col-left">
+            <div class="screenshot-wrapper">
+              <img src="assets/images/ss-08-skill-compare.png" class="screenshot-img" alt="스킬 1.0과 2.0 비교">
+            </div>
+            <div class="screenshot-wrapper">
+              <img src="assets/images/ss-09-skill-types.png" class="screenshot-img" alt="다양한 스킬 종류">
+            </div>
           </div>
-          <div class="screenshot-wrapper">
-            <img src="assets/images/ss-09-skill-types.png" class="screenshot-img" alt="다양한 스킬 종류">
+          <div class="slide-col-right">
+            <div class="command-table">
+              <table>
+                <thead>
+                  <tr><th>항목</th><th>1.0</th><th>2.0</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>구조</td><td>메모 수준</td><td>머리글 + 본문</td></tr>
+                  <tr><td>도구</td><td>제한 없음</td><td>허용 목록 지정</td></tr>
+                  <tr><td>버전</td><td>없음</td><td>이력 추적</td></tr>
+                  <tr><td>재사용</td><td>어려움</td><td>계속 재활용</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="body-text">
+              <p>"알아서 해"가 아니라 <span class="annotation-box">"이 매뉴얼대로, 이 도구만 써서 해"</span>라고 지시하는 겁니다.<span class="annotation-star"></span></p>
+            </div>
           </div>
-        </div>
-
-        <div class="command-table">
-          <table>
-            <thead>
-              <tr>
-                <th>비교 항목</th>
-                <th>스킬 1.0 (예전 방식)</th>
-                <th>스킬 2.0 (새 방식)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>구조</td><td>간단한 메모 수준</td><td>frontmatter(머리글 설정) + 본문</td></tr>
-              <tr><td>도구 제한</td><td>제한 없음 (뭐든 가능)</td><td>allowed-tools(허용 도구 목록)로 제한</td></tr>
-              <tr><td>버전 관리</td><td>없음</td><td>version(버전 번호) 필드로 추적</td></tr>
-              <tr><td>재사용</td><td>어려움</td><td>한번 만들면 계속 재활용</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="body-text">
-          <p>새 직원에게 일을 맡긴다고 생각해보세요. "알아서 해"라고 하면 결과가 들쭉날쭉하겠죠? 하지만 <span class="annotation-box">"이 매뉴얼대로, 이 도구만 써서, 이 순서로 해"</span>라고 하면 훨씬 일관된 결과가 나옵니다. 스킬 2.0이 바로 그런 업무 매뉴얼입니다.</p>
-          <div class="chapter-image-wrapper"><img src="assets/images/concept-skill.png" class="chapter-image" alt="스킬 2.0 개념 일러스트"></div>
         </div>
 
         <div class="page-footer">
